@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Pagination from './pagination';
 import * as actionCreators from '../store/actionCreators';
@@ -12,7 +12,7 @@ import {
   getTimeInterval
 } from '../../../utils';
 
-class Tab extends React.Component {
+class Tab extends React.PureComponent {
 
   componentDidMount() {
     if (this.props.list.size === 0) {
@@ -55,7 +55,9 @@ class Tab extends React.Component {
                     return (
                       <li key={v.get('id')}>
                         <div className="left">
-                          <img className="writer" src={v.getIn(['author', 'avatar_url'])} title={`作者: ${v.getIn(['author', 'loginname'])}`} alt={`作者: ${v.getIn(['author', 'loginname'])}`} />
+                          <Link to={`/user/${v.getIn(['author', 'loginname'])}`}>
+                            <img className="writer" src={v.getIn(['author', 'avatar_url'])} title={`作者: ${v.getIn(['author', 'loginname'])}`} alt={`作者: ${v.getIn(['author', 'loginname'])}`} />
+                          </Link>
                           <span className="count">
                             <span title="回复数">{v.get('reply_count')}</span>/<span title="点击数">{v.get('visit_count')}</span>
                           </span>

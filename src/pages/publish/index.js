@@ -11,7 +11,7 @@ import {
   PublishWrapper
 } from './style';
 
-class Publish extends React.Component {
+class Publish extends React.PureComponent {
 
   componentDidMount() {
     if (this.props.userInfo.get('id')) {

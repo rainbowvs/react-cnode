@@ -9,7 +9,7 @@ import {
   TopicWrapper
 } from './style';
 
-class Topic extends React.Component {
+class Topic extends React.PureComponent {
 
   componentDidMount() {
     this.props.getInitList(this.props.match.params.id);

@@ -8,7 +8,7 @@ import {
 } from './style';
 import { setLogout, setUserInfo } from '../../pages/login/store/actionCreators';
 
-class Header extends React.Component {
+class Header extends React.PureComponent {
 
   componentWillMount() {
     if (window.sessionStorage.getItem('userInfo')) {

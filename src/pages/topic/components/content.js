@@ -12,7 +12,7 @@ import {
   getTimeInterval
 } from '../../../utils';
 
-class Content extends React.Component {
+class Content extends React.PureComponent {
 
   componentWillUnmount() {
     this.props.removeDetail();

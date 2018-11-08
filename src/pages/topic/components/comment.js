@@ -8,7 +8,7 @@ import {
   CommentWrapper
 } from '../style';
 
-class Comment extends React.Component {
+class Comment extends React.PureComponent {
 
   componentDidMount() {
     this.smde = new SimpleMDE({
