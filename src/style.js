@@ -72,6 +72,12 @@ injectGlobal`
     .content-box {
       max-width: 100%;
     }
+    .nav.content-box div:first-child {
+      margin-left: 10px;
+    }
+    .nav.content-box div+div {
+      margin-right: 10px;
+    }
   }
 
 `
