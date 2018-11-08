@@ -147,7 +147,10 @@ export const ReplyList = styled.ul`
         &.replier {
           margin-left: 10px;
           font-weight: bold;
-          color: #666;
+          a {
+            text-decoration: none;
+            color: #666;
+          }
         }
         &.last-time {
           &::before {
