@@ -11,6 +11,10 @@ function* login(action) {
     res = yield call(axios.post, `https://cnodejs.org/api/v1/accesstoken?accesstoken=${action.token}`);
   } catch (e) {
     yield put(loginFetching(false));
+    if (e.response.status === 401) {
+      Message.error(e.response.data.error_msg);
+      return false;
+    }
     Message.error(e);
     return false;
   }
