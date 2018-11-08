@@ -11,10 +11,16 @@ import {
 } from './style';
 import { getTimeInterval } from '../../utils';
 
-class User extends React.Component {
+class User extends React.PureComponent {
 
   componentDidMount() {
     this.props.getInitData(this.props.match.params.name);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.match.params.name !== this.props.match.params.name) {
+      this.props.getInitData(nextProps.match.params.name);
+    }
   }
 
   componentWillUnmount() {
@@ -109,7 +115,9 @@ class User extends React.Component {
                         return (
                           <li key={v.get('id')}>
                             <div className="left">
-                              <img className="writer" src={v.getIn(['author', 'avatar_url'])} title={`作者: ${v.getIn(['author', 'loginname'])}`} alt={`作者: ${v.getIn(['author', 'loginname'])}`} />
+                              <Link to={`/user/${v.getIn(['author', 'loginname'])}`}>
+                                <img className="writer" src={v.getIn(['author', 'avatar_url'])} title={`作者: ${v.getIn(['author', 'loginname'])}`} alt={`作者: ${v.getIn(['author', 'loginname'])}`} />
+                              </Link>
                               <span className="title">
                                 <Link to={`/topic/${v.get('id')}`}>{v.get('title')}</Link>
                               </span>
@@ -151,4 +159,4 @@ const mapDispatch = (dispatch) => {
   }
 }
 
-export default connect(mapState, mapDispatch)(withRouter(User));
+export default withRouter(connect(mapState, mapDispatch)(User));
