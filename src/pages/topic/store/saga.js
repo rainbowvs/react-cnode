@@ -18,6 +18,16 @@ function* getTopicDetailGen(action) {
   }
   if (res.data.success) {
     yield put(setTopicDetail(res.data.data));
+    const links = document.getElementsByClassName('content-box')[1].getElementsByTagName('a');
+    for (var i = 0, len = links.length; i < len; i++) {
+      const href = links[i].getAttribute('href');
+      if (href) {
+        const result = href.match(/^\/user\/(.+)/);
+        if (result) {
+          links[i].setAttribute('href', `#${href}`);
+        }
+      }
+    }
   } else {
     Message.error(res.data.error_msg);
   }
