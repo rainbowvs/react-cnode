@@ -4,16 +4,14 @@ import {
   HomeWrapper,
 } from './style';
 
-export default class Home extends React.Component {
+const Home = props => {
+  return (
+    <HomeWrapper>
+      <div className="content-box">
+        <Tab />
+      </div>
+    </HomeWrapper>
+  )
+};
 
-  render() {
-    return (
-      <HomeWrapper>
-        <div className="content-box">
-          <Tab />
-        </div>
-      </HomeWrapper>
-    )
-  }
-  
-}
+export default Home;

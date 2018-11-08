@@ -9,28 +9,24 @@ import {
   LoginWrapper
 } from './style';
 
-class Login extends React.Component {
-
-  render() {
-    const { Login, userInfo, isFetching } = this.props;
-    if (userInfo.get('id')) {
-      return <Redirect to={`/user/${userInfo.get('name')}`} />
-    } else {
-      return (
-        <LoginWrapper>
-          <div className="content-box">
-            <div className="panel">登录</div>
-            <div className="container">
-              <input ref={(input) => this.tokenInput = input} autoFocus spellCheck="false" type="text" placeholder="Access Token" />
-              <a disabled={isFetching} onClick={() => Login(this.tokenInput)} href={void(0)}>登录</a>
-            </div>
+const Login = props => {
+  const { Login, userInfo, isFetching } = props;
+  if (userInfo.get('id')) {
+    return <Redirect to={`/user/${userInfo.get('name')}`} />
+  } else {
+    return (
+      <LoginWrapper>
+        <div className="content-box">
+          <div className="panel">登录</div>
+          <div className="container">
+            <input ref={(input) => this.tokenInput = input} autoFocus spellCheck="false" type="text" placeholder="Access Token" />
+            <a disabled={isFetching} onClick={() => Login(this.tokenInput)} href={void(0)}>登录</a>
           </div>
-        </LoginWrapper>
-      )
-    }
+        </div>
+      </LoginWrapper>
+    )
   }
-
-}
+};
 
 const mapState = (state) => {
   return {

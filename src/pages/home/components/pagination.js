@@ -9,37 +9,35 @@ import {
   getPagination
 } from '../../../utils';
 
-class Pagination extends React.Component {
-
-  render() {
-    const { tab, currentPage, totalPage, choosePage, isFetching } = this.props;
-    if (isFetching) {
-      return (
-        <Template>
-          <div className="skeleton"></div>
-        </Template>
-      )
-    } else {
-      return (
-        <PaginationWrapper>
-          <ul>
-            {
-              getPagination(currentPage, totalPage).map((v, i) => {
-                if (v === currentPage) {
-                  return <li key={v+i} className="active">{v}</li>
-                } else if (v === '...') {
-                  return <li key={v+i} className="disabled">...</li>
-                } else {
-                  return <li onClick={(c, p, t, l) => choosePage(currentPage, v, tab, 20)} className={v === currentPage ? 'active' : ''} key={v+i}>{v}</li>
-                }
-              })
-            }
-          </ul>
-        </PaginationWrapper>
-      )
-    }
+const Pagination = props => {
+  const { tab, currentPage, totalPage, choosePage, isFetching } = props;
+  if (isFetching) {
+    return (
+      <Template>
+        <div className="skeleton"></div>
+      </Template>
+    )
+  } else {
+    return (
+      <PaginationWrapper>
+        <ul>
+          {
+            getPagination(currentPage, totalPage).map((v, i) => {
+              if (v === currentPage) {
+                return <li key={v+i} className="active">{v}</li>
+              } else if (v === '...') {
+                return <li key={v+i} className="disabled">...</li>
+              } else {
+                return <li onClick={(c, p, t, l) => choosePage(currentPage, v, tab, 20)} className={v === currentPage ? 'active' : ''} key={v+i}>{v}</li>
+              }
+            })
+          }
+        </ul>
+      </PaginationWrapper>
+    )
   }
-}
+};
+
 const mapStateToProps = (state) => {
   return {
     list: state.getIn(['home', 'homeState', 'list']),
