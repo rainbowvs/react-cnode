@@ -1,36 +1,19 @@
 # react-cnode
 cnode of react
 
-基于CRA构建第三方cnode社区-PC端
+基于create-react-app构建第三方cnode社区-PC端
 
 ## 在线预览
 [点我预览](http://rainbowvs.com/cnode/index.html)
 
-## 技术栈
-- "axios": "^0.18.0",
-- "react": "^16.4.2",
-- "react-dom": "^16.4.2",
-- "react-loadable": "^5.5.0",
-- "react-router-dom": "^4.3.1",
-- "react-scripts": "1.1.4",
-- "react-transition-group": "^2.4.0",
-- "redux": "^4.0.0",
-- "react-redux": "^5.0.7",
-- "redux-saga": "^0.16.0",
-- "immutable": "^3.8.2",
-- "redux-immutable": "^4.0.0",
-- "simplemde": "git+https://github.com/rainbowvs/simplemde-markdown-editor.git",
-- "github-markdown-css": "^2.10.0",
-- "styled-components": "^3.4.2"
-
 ## 功能
-> 以下功能均基于[社区API](https://cnodejs.org/api)实现
+> 以下功能均基于[社区API](https://cnodejs.org/api)实现, 近期转外国服务器, 访问可能会略慢
 
-由于社区禁用收藏功能接口, 已无法实现
+由于社区禁用收藏功能接口, 暂时无法实现
 - [x] 话题首页
 - [x] 话题详情
 - [x] 新建话题
-- [x] 编辑话题
+- [ ] 编辑话题
 - [x] 新建评论
 - [x] 为评论点赞
 - [x] 用户详情
@@ -38,21 +21,23 @@ cnode of react
 - [ ] 收藏相关
 - [ ] 消息相关
 
-## 优化
-> 暂时只做代码方面浅层优化, 待RN版更新后一起优化
+## 计划
+> 暂时只做简单优化, 之后抽出空闲时间慢慢补上
 
-目前考虑到的部分优化
-- 渲染
-  - 继承基类改写shouldComponentUpdate
-- 代码性能
-  - Immutable.js高级运用
-- 架构
-  - Webpack定制code split
+* 将缺少的功能补全
+* 进一步完善APP, 网络请求优化
+* 自搭webpack
+
   
 ## 总结
-作为React的入门项目, 通过该项目基本掌握React的开发流程
+作为React的入门项目, 通过该项目基本掌握React的开发流程, 积累一定的React开发经验
 
-接下来会进行RN版的开发, 深入并掌握React全家桶
+开发过程遇到部分问题
+
+* 集成redux和immutable较为复杂, 如果不是一定规模的项目尽量不使用
+* simplemde插件好像缺少维护, 发现较多问题, 根据issue反应的问题fork一份进行修改
+* state修改深层属性需遍历update, 代码呈现冗余, 尽量扁平设计
+* 使用loadable后, 如果依赖于路由的更新要重新渲染，会出现路由更新了但是组件没有重新渲染的情况, 因为redux和mobx的这些连接方法会修改组件的`shouldComponentUpdate`。因此需保证`withRouter`在最外层
 
 ## 交流
 :hammer: 欢迎提issue互相交流学习
