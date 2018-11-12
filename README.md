@@ -3,8 +3,8 @@ cnode of react
 
 基于create-react-app构建第三方cnode社区-PC端
 
-## 在线预览
-[点我预览](http://rainbowvs.com/cnode/index.html)
+## 体验
+[点我体验](http://rainbowvs.com/cnode/index.html)
 
 ## 功能
 > 以下功能均基于[社区API](https://cnodejs.org/api)实现, 近期转外国服务器, 访问可能会略慢
@@ -25,7 +25,7 @@ cnode of react
 > 暂时只做简单优化, 之后抽出空闲时间慢慢补上
 
 * 将缺少的功能补全
-* 进一步完善APP, 网络请求优化
+* 进一步完善, 网络请求优化
 * 自搭webpack
 
   
