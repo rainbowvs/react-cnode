@@ -95,6 +95,17 @@ export const ReplyWrapper = styled.div`
     padding: 10px;
     border-radius: 3px 3px 0 0;
     background: #f6f6f6;
+    button {
+      font-size: 16px;
+      color: ${props => props.theme.themeColor};
+      float: right;
+      cursor: pointer;
+      &::after {
+        display: table;
+        content: '';
+        clear: both;
+      }
+    }
   }
 `;
 

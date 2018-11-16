@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Message from '../../common/message';
 import {
@@ -8,18 +8,23 @@ import {
 import {
   LoginWrapper
 } from './style';
+import { getLocationSearch } from '../../utils';
 
 const Login = props => {
   const { Login, userInfo, isFetching } = props;
   if (userInfo.get('id')) {
-    return <Redirect to={`/user/${userInfo.get('name')}`} />
+    let path = getLocationSearch(props.location.search, 'from');
+    if (path === null) {
+      path = `/user/${userInfo.get('name')}`
+    }
+    return <Redirect to={path} />
   } else {
     return (
       <LoginWrapper>
         <div className="content-box">
           <div className="panel">登录</div>
           <div className="container">
-            <input ref={(input) => this.tokenInput = input} autoFocus spellCheck="false" type="text" placeholder="Access Token" />
+            <input ref={input => this.tokenInput = input} autoFocus spellCheck="false" type="text" placeholder="Access Token" />
             <a disabled={isFetching} onClick={() => Login(this.tokenInput)} href={void(0)}>登录</a>
           </div>
         </div>
@@ -42,9 +47,10 @@ const mapDispatch = (dispatch) => {
         Message.error('Access Token不能为空');
         return false;
       }
+      Message.info('正在验证登录信息...');
       dispatch(goLogin(e.value));
     }
   }
 }
 
-export default connect(mapState, mapDispatch)(Login)
+export default withRouter(connect(mapState, mapDispatch)(Login));

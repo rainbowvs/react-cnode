@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { changeLike } from '../store/actionCreators';
 import Message from '../../../common/message';
@@ -9,7 +9,8 @@ import {
   ReplyList
 } from '../style';
 import {
-  getTimeInterval
+  getTimeInterval,
+  encodeData
 } from '../../../utils';
 
 const Reply = props => {
@@ -18,13 +19,12 @@ const Reply = props => {
     <Fragment>
       { 
         !detail ? (
-          <Template>
-
-          </Template>
+          <Template></Template>
         ) : (
           <ReplyWrapper>
             <div className="panel">
               <span>{detail.get('reply_count')} 回复</span>
+              <button onClick={() => reply(props, userInfo)}>我要回复</button>
             </div>
             <ReplyList>
               {
@@ -32,7 +32,7 @@ const Reply = props => {
                   return (
                     <li key={v.get('id')}>
                       <div className="addtion">
-                        <button disabled={likeFetching} onClick={() => changeLike(v.get('id'), v.getIn(['author','loginname']), userInfo)} className={`like ${v.get('is_uped') ? 'up' : ''}`}><span>{v.get('ups').size}</span></button>
+                        <button disabled={likeFetching} onClick={() => changeLike(props, v.get('id'), v.getIn(['author','loginname']), userInfo)} className={`like ${v.get('is_uped') ? 'up' : ''}`}><span>{v.get('ups').size}</span></button>
                       </div>
                       <div className="info">
                         <Link to={`/user/${v.getIn(['author','loginname'])}`}>
@@ -61,6 +61,25 @@ const Reply = props => {
   );
 };
 
+const validateLogin = (props, userInfo, message, cb) => {
+  const { history, location } = props;
+  if (userInfo.get('id')) {
+    cb && cb();
+  } else {
+    const path = `/login${encodeData({ from: location.pathname })}`;
+    Message.warning(message);
+    history.replace(path);
+  }
+};
+
+
+const reply = (props, userInfo) => {
+  const scHeight = document.documentElement.scrollHeight;
+  validateLogin(props, userInfo, '登录后才能回复', () => {
+    window.scrollTo(0, scHeight);
+  });
+};
+
 const mapState = (state) => {
   return {
     detail: state.getIn(['topic', 'topicState', 'detail']),
@@ -70,18 +89,16 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch, state) => {
   return {
-    changeLike(replyId, replierName, userInfo) {
-      if (userInfo.get('id')) {
+    changeLike(props, replyId, replierName, userInfo) {
+      validateLogin(props, userInfo, '登录后才能点赞', () => {
         if (replierName === userInfo.get('name')) {
           Message.warning('您无法给自己点赞');
         } else {
           dispatch(changeLike(userInfo.get('token'), userInfo.get('id'), replyId));
         }
-      } else {
-        Message.warning('请先登录');
-      }
+      });
     }
   }
-}
+};
 
-export default connect(mapState, mapDispatch)(Reply);
+export default withRouter(connect(mapState, mapDispatch)(Reply));
