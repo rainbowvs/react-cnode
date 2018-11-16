@@ -15,6 +15,12 @@ class Topic extends React.PureComponent {
     this.props.getInitList(this.props.match.params.id);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.match.params.id !== this.props.match.params.id) {
+      this.props.getInitList(nextProps.match.params.id);
+    }
+  }
+
   render() {
     const { userInfo } = this.props;
     return (
@@ -44,4 +50,4 @@ const mapDispatch = (dispatch) => {
   }
 }
 
-export default connect(mapState, mapDispatch)(withRouter(Topic));
+export default withRouter(connect(mapState, mapDispatch)(Topic));
