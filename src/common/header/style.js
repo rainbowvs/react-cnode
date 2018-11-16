@@ -25,7 +25,6 @@ export const Menu = styled.div`
   font-size: 18px;
   &> .avatar {
     display: inline-block;
-    width: 50px;
     height: 50px;
     text-align: center;
     margin-right: 10px;
