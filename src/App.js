@@ -6,6 +6,7 @@ import Login from './pages/login/loadable';
 import Topic from './pages/topic/loadable';
 import User from './pages/user/loadable';
 import Publish from './pages/publish/loadable';
+import Private from './common/private';
 
 const App = props => {
   return (
@@ -16,7 +17,7 @@ const App = props => {
         <Route path="/login" component={Login} />
         <Route exact path="/topic/:id" component={Topic} />
         <Route exact path="/user/:name" component={User} />
-        <Route path="/publish" component={Publish} />
+        <Private path="/publish" component={Publish} />
       </Switch>
     </Fragment>
   );
