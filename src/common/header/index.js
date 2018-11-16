@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import {
@@ -26,18 +26,16 @@ class Header extends React.PureComponent {
           </Logo>
           <Menu>
             {
-              userInfo.get('id') ? (
-                <Fragment>
-                  <Link to={`/user/${userInfo.get('name')}`} className="avatar">
-                    <img src={userInfo.get('avatar')} alt={userInfo.get('name')} />
-                  </Link>
-                  <Link className="new-topic" to="/publish">发布话题</Link>
-                  <button onClick={() => toLogout(this)} className="logout">退出</button>
-                </Fragment>
-              ) : (
-                <Link to="/login" className="login">登录</Link>
-              )
+              userInfo.get('id')
+              ? (
+                <Link to={`/user/${userInfo.get('name')}`} className="avatar">
+                  <img src={userInfo.get('avatar')} alt={userInfo.get('name')} />
+                </Link>
+              ) : null
             }
+            <Link className="new-topic" to="/publish">新建话题</Link>
+            {userInfo.get('id') && <button onClick={() => toLogout(this)} className="logout">退出</button>}
+            {!userInfo.get('id') && <Link to="/login" className="login">登录</Link>}
           </Menu>
         </div>
       </HeaderWrapper>
