@@ -33,7 +33,7 @@ injectGlobal`
   }
   
   html {
-    height: 100%;
+    min-height: 100%;
     overflow-y: scroll;
   }
   

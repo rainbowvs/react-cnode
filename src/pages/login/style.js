@@ -21,7 +21,8 @@ export const LoginWrapper = styled.div`
         padding-top: 150px;
         display: block;
         text-align: center;
-        width: 500px;
+        width: 80%;
+        max-width: 500px;
         height: 35px;
         border: none;
         border-bottom: 2px solid #f6f6f6;
@@ -40,7 +41,8 @@ export const LoginWrapper = styled.div`
         text-decoration: none;
         margin: 30px auto;
         display: block;
-        width: 500px;
+        width: 80%;
+        max-width: 500px;
         height: 35px;
         line-height: 35px;
         font-size: 20px;

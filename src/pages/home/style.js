@@ -129,7 +129,7 @@ export const PaginationWrapper = styled.div`
     min-width: 15px;
     text-align: center;
     display: inline-block;
-    padding: 10px 10px;
+    padding: 6px 6px;
     font-size: 14px;
     color: #666666;
     border: 1px solid #666666;
