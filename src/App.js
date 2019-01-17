@@ -18,6 +18,7 @@ const App = props => {
         <Route exact path="/topic/:id" component={Topic} />
         <Route exact path="/user/:name" component={User} />
         <Private path="/publish" component={Publish} />
+        <Redirect to="/" />
       </Switch>
     </Fragment>
   );
